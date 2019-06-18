@@ -6,8 +6,11 @@ include_directories(${LiveMedia_SOURCE_DIR}/include)
 include_directories(${BasicUsageEnvironment_SOURCE_DIR}/include)
 include_directories(${live555_SOURCE_DIR}/include)
 
+if(LINUX)
+else(LINUX)
 include_directories(${live555_SOURCE_DIR}/win-pthread/include)
 link_directories(${live555_SOURCE_DIR}/win-pthread/lib/x64)
+endif(LINUX)
 
 if(LINUX)
 set(my_pthread_lib "pthread")
