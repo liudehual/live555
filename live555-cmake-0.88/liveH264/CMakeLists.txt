@@ -5,6 +5,15 @@ include_directories(${GroupSock_SOURCE_DIR}/include)
 include_directories(${LiveMedia_SOURCE_DIR}/include)
 include_directories(${BasicUsageEnvironment_SOURCE_DIR}/include)
 include_directories(${live555_SOURCE_DIR}/include)
+include_directories(${live555_SOURCE_DIR}/win-pthread/include)
+link_directories(${live555_SOURCE_DIR}/win-pthread/lib/x64)
+
+if(LINUX)
+set(my_pthread_lib "pthread")
+else(LINUX)
+set(my_pthread_lib "pthreadVC2")
+endif(LINUX)
+
 set(SRC_LIST
 	AudioServerMediaSubsession.cpp
 	FramedAudioSource.cpp
@@ -29,11 +38,12 @@ TARGET_LINK_LIBRARIES(LiveH264
 
 
 add_executable(test_live test_live.cpp)
+
 TARGET_LINK_LIBRARIES(test_live
         LiveMedia 
         GroupSock 
         BasicUsageEnvironment 
         UsageEnvironment
         LiveH264
-        pthread
+		${my_pthread_lib}
         )

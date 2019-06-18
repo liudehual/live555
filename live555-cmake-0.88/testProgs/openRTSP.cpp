@@ -22,7 +22,9 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 // Instead, we recommend using the "testRTSPClient" application code as a model.
 
 #include "playCommon.hh"
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 RTSPClient* ourRTSPClient = NULL;
 Medium* createClient(UsageEnvironment& env, char const* url, int verbosityLevel, char const* applicationName) {
     extern portNumBits tunnelOverHTTPPortNum;

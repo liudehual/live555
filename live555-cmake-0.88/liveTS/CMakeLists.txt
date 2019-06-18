@@ -5,6 +5,14 @@ include_directories(${GroupSock_SOURCE_DIR}/include)
 include_directories(${LiveMedia_SOURCE_DIR}/include)
 include_directories(${BasicUsageEnvironment_SOURCE_DIR}/include)
 include_directories(${live555_SOURCE_DIR}/include)
+include_directories(${live555_SOURCE_DIR}/win-pthread/include)
+link_directories(${live555_SOURCE_DIR}/win-pthread/lib/x64)
+
+if(LINUX)
+set(my_pthread_lib "pthread")
+else(LINUX)
+set(my_pthread_lib "pthreadVC2")
+endif(LINUX)
 set(SRC_LIST
 	FrameCache.cpp
 	LiveTsFrameSource.cpp
@@ -12,15 +20,16 @@ set(SRC_LIST
 	OSMutex.cpp
 	LiveTs.cpp
 )
-add_definitions(-O2 -g) 
+#add_definitions(-O2 -g) 
 add_library(LiveTs STATIC ${SRC_LIST})
 TARGET_LINK_LIBRARIES(LiveTs
         LiveMedia 
         GroupSock 
         BasicUsageEnvironment 
         UsageEnvironment
-        pthread
+        ${my_pthread_lib}
         )
+
 add_executable(testTsLiveServer testTsLiveServer.cpp)
 
 TARGET_LINK_LIBRARIES(testTsLiveServer
@@ -29,5 +38,5 @@ TARGET_LINK_LIBRARIES(testTsLiveServer
         BasicUsageEnvironment 
         UsageEnvironment
         LiveTs
-        pthread
-        )
+		${my_pthread_lib}
+		)

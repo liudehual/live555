@@ -22,7 +22,9 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "GroupsockHelper.hh"
 
 #include "BasicUsageEnvironment.hh"
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 // To receive a stream of 'ADUs' rather than raw MP3 frames, uncomment this:
 //#define STREAM_USING_ADUS 1
 // (For more information about ADUs and interleaving,

@@ -21,7 +21,9 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "GroupsockHelper.hh"
 
 #include "BasicUsageEnvironment.hh"
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 // To stream using 'ADUs' rather than raw MP3 frames, uncomment the following:
 //#define STREAM_USING_ADUS 1
 // To also reorder ADUs before streaming, uncomment the following:

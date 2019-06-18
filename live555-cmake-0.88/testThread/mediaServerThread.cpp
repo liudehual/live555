@@ -1,6 +1,11 @@
 #include "liveThread.hh"
 #include <pthread.h>
 #include <time.h>
+
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
+
 int main()
 {
 	/*
@@ -15,6 +20,7 @@ int main()
 	LiveThread thread2(7070);
     pthread_create(&t2,NULL,LiveThread::Run,&thread2);
 #endif
+
 	pthread_t t3;
 	LiveThread thread3(12345);
     pthread_create(&t3,NULL,LiveThread::Run,&thread3);
@@ -38,9 +44,13 @@ int main()
 	pthread_t t8;
 	LiveThread thread8(33333);
     pthread_create(&t8,NULL,LiveThread::Run,&thread8);
-    
+
 	while(1){
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+		Sleep(3000);
+#else
 		sleep(3);
+#endif
 	}
 	return 1;
 }

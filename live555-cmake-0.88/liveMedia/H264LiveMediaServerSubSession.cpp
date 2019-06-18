@@ -11,20 +11,20 @@ H264LiveMediaServerSubSession::~H264LiveMediaServerSubSession()
 }
 char const* H264LiveMediaServerSubSession::sdpLines()
 {
-
+	return NULL;
 }
 
 FramedSource* H264LiveMediaServerSubSession::createNewStreamSource(unsigned clientSessionId,
                                                                    unsigned& estBitrate)
 {
-
+	return NULL;
 }
 // "estBitrate" is the stream's estimated bitrate, in kbps
 RTPSink* H264LiveMediaServerSubSession::createNewRTPSink(Groupsock* rtpGroupsock,
                                                          unsigned char rtpPayloadTypeIfDynamic,
                                                          FramedSource* inputSource)
 {
-
+	return NULL;
 }
 #if 1
 void H264LiveMediaServerSubSession::startStream(unsigned clientSessionId, void* streamToken,
@@ -69,11 +69,11 @@ void H264LiveMediaServerSubSession::setStreamScale(unsigned clientSessionId, voi
 }
 float H264LiveMediaServerSubSession::getCurrentNPT(void* streamToken)
 {
-
+	return 0.0;
 }
 FramedSource* H264LiveMediaServerSubSession::getStreamSource(void* streamToken)
 {
-
+	return NULL;
 }
 void H264LiveMediaServerSubSession::getRTPSinkandRTCP(void* streamToken,
                                                       RTPSink const*& rtpSink, RTCPInstance const*& rtcp)
@@ -95,7 +95,7 @@ void H264LiveMediaServerSubSession::testScaleFactor(float& scale) // sets "scale
 }
 float H264LiveMediaServerSubSession::duration() const
 {
-
+	return 0;
 }
 // returns 0 for an unbounded session (the default)
 // returns > 0 for a bounded session

@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <process.h>
 #else
-#include<pthread.h>
+
 #include <sys/time.h>
 #include <string.h>
 #include <unistd.h>
@@ -10,19 +10,38 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include<pthread.h>
 #include "LiveTs.h"
+
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 void *WirteDataThread(void *arg)
 {
 	startRtspServer(12345);
+	return NULL;
 }
 int main(int argc,char *argv[])
 {
 	pthread_t thread1;
 	pthread_create(&thread1,NULL,WirteDataThread,NULL);
 
+	#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+	Sleep(1000);
+	
+#else
+	
 	sleep(1);
+#endif
 	setChannel(16);
+
+	#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+	Sleep(1000);
+	
+#else
+	
 	sleep(1);
+#endif
 
 	#if 1
 	FILE *fp=fopen("test.ts","rb");
@@ -47,13 +66,25 @@ int main(int argc,char *argv[])
 		writeData(buffer,len,6);
 
 		writeData(buffer,len,7);
-
-		usleep(20*1000);
+			#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+	Sleep(20);
+	
+#else
+	
+	usleep(20*1000);
+#endif
+		
 	}
 	#endif
 
 	for(;;){
-		sleep(1);
+			#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+	Sleep(1000);
+	
+#else
+	
+	sleep(1);
+#endif
 	}
 	fprintf(stderr,"hello testTsLiveServer \n");
 	return 0;

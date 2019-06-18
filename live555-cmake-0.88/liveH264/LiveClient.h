@@ -1,5 +1,5 @@
-#ifndef _LIVE_CLIENT_H_
-#define _LIVE_CLIENT_H_
+#ifndef _LIVE_CLIENT_H__
+#define _LIVE_CLIENT_H__
 
 typedef enum{
 	JVLIVE_ERR_OK,

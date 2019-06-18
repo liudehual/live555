@@ -22,6 +22,10 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "BasicUsageEnvironment.hh"
 #include "GroupsockHelper.hh"
 
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
+
 // To stream using "source-specific multicast" (SSM), uncomment the following:
 //#define USE_SSM 1
 #ifdef USE_SSM

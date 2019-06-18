@@ -20,7 +20,9 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include <BasicUsageEnvironment.hh>
 #include "DynamicRTSPServer.hh"
 #include "version.hh"
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 int main(int argc, char** argv) {
     /*
         创建系统运行环境及调度环境

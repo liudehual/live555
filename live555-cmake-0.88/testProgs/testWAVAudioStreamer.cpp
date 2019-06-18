@@ -21,7 +21,9 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "GroupsockHelper.hh"
 
 #include "BasicUsageEnvironment.hh"
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 // To convert 16-bit samples to 8-bit u-law ("u" is the Greek letter "mu")
 // encoding, before streaming, uncomment the following line:
 //#define CONVERT_TO_ULAW 1

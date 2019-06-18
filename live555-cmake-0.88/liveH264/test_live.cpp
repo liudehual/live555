@@ -1,11 +1,19 @@
 #include "Live.h"
+#include "LiveClient.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
-#include "LiveClient.h"
-#include <sys/time.h>
 #include <string.h>
-#include <unistd.h>
+#include <pthread.h>
+#if	defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+	#include <windows.h>
+#else
+	#include <sys/time.h>
+	#include <string.h>
+	#include <unistd.h>
+#endif
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 static pthread_t LiveThread;
 static void *Live_thread(void *param)
 {
@@ -32,9 +40,11 @@ int main(int argc, char *argv[])
 
 	int a = 10;
 	int i;
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+	Sleep(50);
+#else
 	usleep(50*1000);
-
+#endif
 	while(1){	
 		int len;
 		static unsigned char buffer[5*1024*1024];
@@ -76,7 +86,11 @@ int main(int argc, char *argv[])
 					liveRtspWriteEx(2, (char *)&buffer[readPtr], nextStartCodePtr - readPtr);
 					
 					readPtr = nextStartCodePtr;
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+					Sleep(50);
+#else
 					usleep(30*1000);
+#endif
 					break;
 				}
 				nextStartCodePtr++;

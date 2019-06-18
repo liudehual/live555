@@ -21,7 +21,9 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "liveMedia.hh"
 #include "BasicUsageEnvironment.hh"
 #include "GroupsockHelper.hh"
-
+#if defined(__WIN32__) || defined(_WIN32) || defined(_WIN32_WCE)
+#pragma comment(lib,"ws2_32.lib")
+#endif
 // Uncomment the following if the input file is a MPEG Program Stream
 // rather than a MPEG Video Elementary Stream
 //#define SOURCE_IS_PROGRAM_STREAM 1
