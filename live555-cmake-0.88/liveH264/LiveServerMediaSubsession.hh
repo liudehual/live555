@@ -39,13 +39,14 @@ public:
 	  void checkForAuxSDPLine1();
 	  void afterPlayingDummy1();
 
-virtual void startStream(unsigned clientSessionId, void* streamToken,
+virtual void startStream(unsigned clientSessionId, 
+			   void* streamToken,
 			   TaskFunc* rtcpRRHandler,
 			   void* rtcpRRHandlerClientData,
 			   unsigned short& rtpSeqNum,
-                           unsigned& rtpTimestamp,
+               unsigned& rtpTimestamp,
 			   ServerRequestAlternativeByteHandler* serverRequestAlternativeByteHandler,
-                           void* serverRequestAlternativeByteHandlerClientData);
+               void* serverRequestAlternativeByteHandlerClientData);
                            
     virtual void pauseStream(unsigned clientSessionId, void* streamToken);
 

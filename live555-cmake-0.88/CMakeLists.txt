@@ -8,6 +8,7 @@ if(LINUX)
 endif(LINUX)
 if(WIN32)
 endif(WIN32)
+
 #添加调试信息(gdb)
 #add_definitions(-g)
 
@@ -17,8 +18,8 @@ ADD_SUBDIRECTORY(BasicUsageEnvironment)
 ADD_SUBDIRECTORY(liveMedia)
 ADD_SUBDIRECTORY(liveH264)
 ADD_SUBDIRECTORY(liveTS)
+ADD_SUBDIRECTORY(livePS)
 ADD_SUBDIRECTORY(mediaServer)
 ADD_SUBDIRECTORY(testThread)
 ADD_SUBDIRECTORY(testProgs)
 ADD_SUBDIRECTORY(proxyServer)
-

@@ -12,9 +12,9 @@ link_directories(${live555_SOURCE_DIR}/win-pthread/lib/x64)
 endif(LINUX)
 
 if(LINUX)
-set(my_pthread_lib "pthread")
+	set(my_pthread_lib "pthread")
 else(LINUX)
-set(my_pthread_lib "pthreadVC2")
+	set(my_pthread_lib "pthreadVC2")
 endif(LINUX)
 
 set(SRC_LIST

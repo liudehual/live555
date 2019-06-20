@@ -254,8 +254,7 @@ int LiveServerMediaSubsession::WriteFrame(char *data, int len)
 //		}
 //	}
 
-	if (dataManager)
-	{
+	if (dataManager){
 		return dataManager->WriteFrame((unsigned char *)data, len);
 	}
 	return -1;

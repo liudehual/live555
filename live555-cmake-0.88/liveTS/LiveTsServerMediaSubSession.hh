@@ -37,9 +37,8 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #ifndef _MPEG2_TRANSPORT_STREAM_FROM_ES_SOURCE_HH
 #include "MPEG2TransportStreamFromESSource.hh"
 #endif
-
+class Cache;
 class ClientTrickPlayState1; // forward
-class CacheManager;
 
 class LiveTsServerSubSession: public OnDemandServerMediaSubsession {
 public:
@@ -47,7 +46,7 @@ public:
   createNew(UsageEnvironment& env,
 	    char const* indexFileName,
 	    Boolean reuseFirstSource);
-	CacheManager *getCacheManager(){return frameManager;}
+	Cache *getCache(){return fCache;}
 
 protected:
   LiveTsServerSubSession(UsageEnvironment& env,
@@ -85,7 +84,8 @@ private: // redefined virtual functions
   virtual void testScaleFactor(float& scale);
   virtual float duration() const;
 private:
-		CacheManager *frameManager;
+		Cache *fCache;
+		
 private:
   ClientTrickPlayState1* lookupClient(unsigned clientSessionId);
 

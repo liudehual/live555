@@ -22,7 +22,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "SimpleRTPSink.hh"
 #include "LiveTsServerMediaSubSession.hh"
 #include "LiveTsFrameSource.hh"
-#include "FrameCache.hh"
+#include "Cache.h"
 LiveTsServerSubSession*
 LiveTsServerSubSession::createNew(UsageEnvironment& env,
                                                    char const* indexFileName,
@@ -48,7 +48,7 @@ LiveTsServerSubSession
         fDuration = fIndexFile->getPlayingDuration();
         fClientSessionHashTable = HashTable::create(ONE_WORD_HASH_KEYS);
     }
-    frameManager=new CacheManager();
+    fCache=new Cache();
 }
 
 LiveTsServerSubSession
@@ -161,7 +161,7 @@ FramedSource* LiveTsServerSubSession
         estBitrate = 5000; // kbps, estimate
     }
 
-	LiveFrameSource *inputSource=new LiveFrameSource(envir(),frameManager);
+	LiveFrameSource *inputSource=new LiveFrameSource(envir(),fCache);
     // Create a framer for the Transport Stream:
     MPEG2TransportStreamFramer* framer
             = MPEG2TransportStreamFramer::createNew(envir(), inputSource/*添加自己的source*/);

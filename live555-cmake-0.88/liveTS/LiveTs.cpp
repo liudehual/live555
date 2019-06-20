@@ -3,7 +3,7 @@
 #include "BasicUsageEnvironment.hh"
 #include "LiveTsServerMediaSubSession.hh"
 #include "ServerMediaSession.hh"
-#include "FrameCache.hh"
+#include "Cache.h"
 #define MAX_LIVE_SUB_SESSION_NUM 256
 
 Boolean reuseFirstSource = False;
@@ -46,8 +46,9 @@ int setChannel(unsigned int chNum)
 		char streamNameBuf[16]={'\0'};
 		sprintf(streamNameBuf,streamName,i);
 		fprintf(stderr,"%s\n",streamNameBuf);
-		LiveTsServerSubSession  *tsSubSession=LiveTsServerSubSession
-    								::createNew(*env,NULL,reuseFirstSource);
+		LiveTsServerSubSession  *tsSubSession=LiveTsServerSubSession::createNew(*env,
+														NULL,
+														reuseFirstSource);
 		
 		liveSubSession[i]=tsSubSession;
 		
@@ -64,7 +65,7 @@ int writeData(unsigned char *buf,unsigned int bufLen,int channel)
 		fprintf(stderr,"SomeThing is Error While WriteData \n");
 		return 0;
 	}	
-	liveSubSession[channel]->getCacheManager()->writeData(buf,bufLen);
+	liveSubSession[channel]->getCache()->write_data(buf,bufLen);
 
 	return 1;
 }

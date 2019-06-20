@@ -17,10 +17,9 @@ else(LINUX)
 set(my_pthread_lib "pthreadVC2")
 endif(LINUX)
 set(SRC_LIST
-	FrameCache.cpp
+	Cache.cpp
 	LiveTsFrameSource.cpp
 	LiveTsServerMediaSubSession.cpp
-	OSMutex.cpp
 	LiveTs.cpp
 )
 #add_definitions(-O2 -g) 
